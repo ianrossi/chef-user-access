@@ -14,7 +14,7 @@ Cookbooks required are:
 Requires the following node attributes to be set: (see Usage section)
 - node[:users]
 - node[:sudoers]
-- node[:groups]
+- node[:groups] (optional, not required)
 
 Attributes
 ----------
@@ -40,11 +40,8 @@ Attributes
   <tr>
     <td><tt>node.default['sudoers']</tt></td>
     <td>Array</td>
-    <td>A list of sudoers. Items in the list can be either a user or a group. Each item in the array is titled with the user or group name and then key/value pairs determine the sudoer options for each sudoer. See example below. The key/value pairs for now are: <br>
-      - commands: an array of system commands allowed for the sudoer <br>
-      - nopasswd: boolean, whether to invoke a passwd for the sudoer
-    </td>
-    <td><tt>true</tt></td>
+    <td>An list of sudoers. Items in the list can be either a user or a group. Each item in the array is titled with the user or group name and then key/value pairs determine the sudoer options for each sudoer. See example below. The key/value pairs are: </td>
+    <td><tt>empty</tt></td>
   </tr>
 </table>
 
@@ -60,7 +57,12 @@ Set the above attributes on the node and then include `vmc-access` in your node'
   "name": "double-kestrel",
   "description": "A node that runs both buffer and persist queues for Reptar",
   "chef_type": "role",
-  "default_attributes": { 
+  "default_attributes": {
+    "authorization": {
+      "sudo": {
+        "include_sudoers_d": "true"
+      }
+    }, 
     "users": [
       "buffer",
       "nagios"

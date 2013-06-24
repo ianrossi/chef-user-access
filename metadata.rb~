@@ -1,0 +1,11 @@
+name             'user-access'
+maintainer       'Ian D. Rossi'
+maintainer_email 'ian.d.rossi@gmail.com'
+license          'All rights reserved'
+description      'Installs/Configures user-access'
+long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
+version          '0.1.0'
+
+depends          "group::data_bag"
+depends          "user::data_bag"
+depends          "sudo"
