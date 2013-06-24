@@ -1,6 +1,6 @@
 user-access Cookbook
 ===================
-This cookbook is essentially a wrapper for Fletcher Nichol's "user" cookbook and the sudo cookbook. It allows you to use attributes to specify the users and sudoers to be managed. The main goal of this cookbook is to make user access more accessible in Chef code. Chef Server allows us, with an attribute-driven infrastructure, to
+This cookbook is essentially a wrapper for Fletcher Nichol's "user" cookbook and the sudo cookbook. It allows you to use attributes to specify the users and sudoers to be managed. The main goal of this cookbook is to give more visibility to user access in the Chef code. Chef Server allows us, with an attribute-driven infrastructure, to
 - Define users and groups in data bags
 - Define user access in attributes
 
@@ -59,9 +59,10 @@ Attributes
 
 Usage
 -----
+The intended usage is such that all users, groups and sudoers can be defined in a role or in a cookbook as lists and sudo blocks calling the sudo LWRP do not need to be included in the wrapping recipe. You just need to include this recipe in a node's run listand set the attributes.
 #### user-access::default
 
-Set the above attributes on the node and then include `user-access` in your node's `run_list`. Here is an example role.
+Set the attributes described above on the node and then include the `user-access` default recipe in your node's `run_list`. This way all users, groups and sudoers on the node are visible in the role. Here is an example role.
 
 ```json
 {
@@ -111,7 +112,7 @@ Set the above attributes on the node and then include `user-access` in your node
 
 ```
 
-If you are including this recipe in another cookbook, you can set these same attributes from within that cookbook. This way the users, groups and sudoers associated with that cookbook will all be visible in one place.
+If you are including this recipe in another cookbook, you can set these same attributes from that cookbook's attributes files. This way the users, groups and sudoers associated with that cookbook will all be visible in one place.
 
 Authors
 -------------------
